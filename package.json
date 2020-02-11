@@ -12,5 +12,9 @@
     "node-telegram-bot-api": "^0.40.0",
     "nodemon": "^2.0.2",
     "request-promise": "^4.2.5"
+  },
+  "devDependencies": {
+    "@types/node-telegram-bot-api": "^0.40.2",
+    "@types/request-promise": "^4.1.45"
   }
 }

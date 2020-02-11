@@ -1,4 +1,4 @@
-const start = 'start';
+const start = '/start';
 const aboutUs = 'Про нас';
 const location = 'Де знаходиться клініка';
 const doctors = 'Наші працівники';
