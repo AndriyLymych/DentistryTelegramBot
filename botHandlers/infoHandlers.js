@@ -22,6 +22,13 @@ const botInfoMessages = bot.on('message', async msg => {
             msg.chat.id, infoMessages.location.locInfo, infoMessages.menu
         );
 
+    } else if (msg.text.includes(userMessages.workingTime)) {
+
+        await bot.sendMessage(msg.chat.id, infoMessages.workingTime, infoMessages.menu);
+
+    } else if (msg.text.includes(userMessages.bye)) {
+
+        await bot.sendMessage(msg.chat.id, `До побачення, ${msg.from.first_name}` + infoMessages.bye);
 
     } else {
         await bot.sendMessage(msg.chat.id, infoMessages.anyMsg);
