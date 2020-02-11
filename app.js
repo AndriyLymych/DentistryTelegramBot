@@ -1,15 +1,9 @@
-const Telegram = require('node-telegram-bot-api');
+const {bot} = require('./createBot');
+const {start,menu} = require('./constant/infoMessages');
 
-const {TELEGRAM_BOT_TOKEN} = require('./config/config');
-
-const bot = new Telegram(TELEGRAM_BOT_TOKEN, {polling: true});
-
-bot.on('message', async msg => {
-    const id = msg.chat.id;
-
-    await bot.sendMessage(id, 'Привіт', {
-        reply_markup: {
-            keyboard: [["Про ", "Second sample"], ["Keyboard"], ["I'm robot"]]
-        }
-    })
+bot.on('message', async msg=>{
+   await bot.sendLocation(msg.chat.id,39.27308859, -76.19238295);
 })
+
+
+
