@@ -1,7 +1,7 @@
 const {infoHandlers} = require('./botHandlers');
 
 try {
-    infoHandlers.anyMessage;
+    infoHandlers.botInfoMessages;
 } catch (e) {
     console.log(e);
 }

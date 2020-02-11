@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "node-telegram-bot-api": "^0.40.0",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "request-promise": "^4.2.5"
   }
 }
