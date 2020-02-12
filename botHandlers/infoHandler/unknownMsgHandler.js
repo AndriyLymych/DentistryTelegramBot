@@ -4,6 +4,10 @@ const {bot} = require('../../createBot');
 module.exports.anyMsg = async msg => {
 
     await bot.sendMessage(
-        msg.chat.id, infoMessages.anyMsg, infoMessages.menu
+        msg.chat.id, infoMessages.anyMsg, {
+            reply_markup: {
+                keyboard: [["start"]]
+            }
+        }
     );
 }
