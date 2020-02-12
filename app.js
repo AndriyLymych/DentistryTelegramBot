@@ -19,27 +19,27 @@ try {
     bot.on('message', async msg => {
 
         if (msg.text.includes(userMessages.start)) {
-            await startHandler.start(msg);
-        }else if (msg.text.includes(userMessages.aboutUs)){
-            await aboutUsHandler.aboutInfo(msg);
+            await startHandler(msg);
+        } else if (msg.text.includes(userMessages.aboutUs)) {
+            await aboutUsHandler(msg);
 
-        }else if (msg.text.includes(userMessages.location)){
-            await locationHandler.getLocation(msg);
+        } else if (msg.text.includes(userMessages.location)) {
+            await locationHandler(msg);
 
-        }else if (msg.text.includes(userMessages.services)){
-            await getServicesHandler.services(msg);
+        } else if (msg.text.includes(userMessages.services)) {
+            await getServicesHandler(msg);
 
-        }else if (msg.text.includes(userMessages.doctors)){
-            await getAllDoctorsHandler.doctors(msg);
+        } else if (msg.text.includes(userMessages.doctors)) {
+            await getAllDoctorsHandler(msg);
 
-        }else if (msg.text.includes(userMessages.workingTime)){
-            await workingTimeHandler.workingTime(msg);
+        } else if (msg.text.includes(userMessages.workingTime)) {
+            await workingTimeHandler(msg);
 
-        }else if (msg.text.includes(userMessages.bye)){
-            await goodByHandler.bye(msg);
+        } else if (msg.text.includes(userMessages.bye)) {
+            await goodByHandler(msg);
 
-        }else {
-            await unknownMsgHandler.anyMsg(msg)
+        } else {
+            await unknownMsgHandler(msg)
         }
 
     })

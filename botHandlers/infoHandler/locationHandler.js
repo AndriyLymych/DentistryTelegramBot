@@ -1,7 +1,7 @@
 const {infoMessages} = require("../../constant");
 const {bot} = require('../../createBot');
 
-module.exports.getLocation = async msg => {
+module.exports = async msg => {
     await bot.sendLocation(
         msg.chat.id, infoMessages.location.lat, infoMessages.location.long, infoMessages.menu
     );
