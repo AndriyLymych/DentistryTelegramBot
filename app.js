@@ -15,21 +15,33 @@ const {bot} = require('./createBot');
 const {ADMIN_CHAT_ID} = require('./config/config');
 
 try {
-    const commands = Object.values(userMessages);
 
-    bot.on('message', msg => {
-        if (commands.includes(msg.text)) {
-            bot.onText(new RegExp(userMessages.start), startHandler);
-            bot.onText(new RegExp(userMessages.aboutUs), aboutUsHandler);
-            bot.onText(new RegExp(userMessages.location), locationHandler);
-            bot.onText(new RegExp(userMessages.services), getServicesHandler);
-            bot.onText(new RegExp(userMessages.doctors), getAllDoctorsHandler);
-            bot.onText(new RegExp(userMessages.workingTime), workingTimeHandler);
-            bot.onText(new RegExp(userMessages.bye), goodByHandler);
+    bot.on('message', async msg => {
 
-        } else {
-            bot.sendMessage(msg.chat.id,unknownMsgHandler)
+        if (msg.text.includes(userMessages.start)) {
+            await startHandler.start(msg);
+        }else if (msg.text.includes(userMessages.aboutUs)){
+            await aboutUsHandler.aboutInfo(msg);
+
+        }else if (msg.text.includes(userMessages.location)){
+            await locationHandler.getLocation(msg);
+
+        }else if (msg.text.includes(userMessages.services)){
+            await getServicesHandler.services(msg);
+
+        }else if (msg.text.includes(userMessages.doctors)){
+            await getAllDoctorsHandler.doctors(msg);
+
+        }else if (msg.text.includes(userMessages.workingTime)){
+            await workingTimeHandler.workingTime(msg);
+
+        }else if (msg.text.includes(userMessages.bye)){
+            await goodByHandler.bye(msg);
+
+        }else {
+            await unknownMsgHandler.anyMsg(msg)
         }
+
     })
 
 } catch (e) {

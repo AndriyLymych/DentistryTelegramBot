@@ -2,7 +2,7 @@ const {bot} = require('../createBot');
 const requestPromise = require('request-promise');
 const {HOST} = require('../config/config');
 
-module.exports = async msg => {
+module.exports.services = async msg => {
 
     let resBot = ``;
 
