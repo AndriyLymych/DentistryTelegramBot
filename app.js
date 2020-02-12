@@ -15,20 +15,20 @@ const {bot} = require('./createBot');
 const {ADMIN_CHAT_ID} = require('./config/config');
 
 try {
+    const commands = Object.values(userMessages);
+
     bot.on('message', msg => {
-        const commands = Object.values(userMessages);
-
         if (commands.includes(msg.text)) {
-            bot.onText(new RegExp(userMessages.services), getServicesHandler);
-            bot.onText(new RegExp(userMessages.doctors), getAllDoctorsHandler);
-
             bot.onText(new RegExp(userMessages.start), startHandler);
             bot.onText(new RegExp(userMessages.aboutUs), aboutUsHandler);
+            bot.onText(new RegExp(userMessages.location), locationHandler);
+            bot.onText(new RegExp(userMessages.services), getServicesHandler);
+            bot.onText(new RegExp(userMessages.doctors), getAllDoctorsHandler);
             bot.onText(new RegExp(userMessages.workingTime), workingTimeHandler);
             bot.onText(new RegExp(userMessages.bye), goodByHandler);
-        } else {
-            bot.sendMessage(msg.chat.id, unknownMsgHandler);
 
+        } else {
+            bot.sendMessage(msg.chat.id,unknownMsgHandler)
         }
     })
 
