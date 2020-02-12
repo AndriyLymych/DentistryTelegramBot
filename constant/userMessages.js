@@ -14,4 +14,4 @@ module.exports = {
     services,
     workingTime,
     bye
-}
+};
