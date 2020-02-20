@@ -8,7 +8,8 @@ const {
         unknownMsgHandler
     },
     getAllDoctorsHandler,
-    getServicesHandler
+    getServicesHandler,
+    receptionRememberMessage
 } = require('./botHandlers');
 const {userMessages} = require('./constant');
 const {bot} = require('./createBot');
@@ -37,12 +38,14 @@ try {
 
         } else if (msg.text.includes(userMessages.bye)) {
             await goodByHandler(msg);
-
+        } else if (msg.text.includes(userMessages.rec)) {
+            await receptionRememberMessage(msg);
         } else {
             await unknownMsgHandler(msg)
         }
-
     })
+
+    receptionRememberMessage()
 
 } catch (e) {
     bot.sendMessage(ADMIN_CHAT_ID, JSON.stringify(e))

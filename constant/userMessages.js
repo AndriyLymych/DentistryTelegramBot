@@ -6,6 +6,7 @@ const services = 'Наші послуги';
 const workingTime = 'Графік роботи';
 const bye = 'До побачення';
 
+
 module.exports = {
     start,
     aboutUs,
