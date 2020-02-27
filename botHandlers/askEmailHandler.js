@@ -3,27 +3,31 @@ const requestPromise = require('request-promise');
 const {bot} = require('../createBot');
 const {HOST} = require('../config/config');
 const {infoMessages} = require('../constant');
-module.exports = async msg => {
 
+module.exports = async msg => {
+    const chatId = msg.chat.id;
     let resBot = ``;
 
-    let records = await requestPromise.get(HOST + '/receptions');
+    console.log(`${HOST}/receptions?chat_id=${chatId}`);
+    let records = await requestPromise.get(`${HOST}/receptions?chat_id=${chatId}`);
 
     records = JSON.parse(records);
 
-    records.forEach(record => {
-        if (record.chat_id === msg.chat.id) {
-            resBot += record.name;
-            bot.sendMessage(msg.chat.id, resBot);
-            console.log(msg.chat.id);
-        } else {
-            console.log(msg.chat.id);
+    console.log(records);
 
-            bot.sendMessage(msg.chat.id, infoMessages.getEmail);
-        }
+    if (!records.length) {
+        await bot.sendMessage(chatId, infoMessages.getEmail);
+        // TODO next step needed
+        // TODO how to handle email step by step??????? App.js always handle message with email like not valid!
+        return;
+    }
 
+    for (const record of records) {
+        const {date, MedicalService: {service}} = record;
 
-    });
+        resBot += `Дата: ${new Date(date).toLocaleDateString()}\nПослуга: ${service} \n \n`;
+        console.log(chatId);
+    }
 
-
+    return bot.sendMessage(chatId, resBot);
 };
