@@ -41,9 +41,7 @@ try {
             await goodByHandler(msg);
 
         } else if (msg.text.includes(userMessages.myReceptions)) {
-
             await askEmailHandler(msg);
-
         } else {
 
             await unknownMsgHandler(msg)
