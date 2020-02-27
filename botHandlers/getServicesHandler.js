@@ -2,7 +2,7 @@ const {bot} = require('../createBot');
 const requestPromise = require('request-promise');
 const {HOST} = require('../config/config');
 
-module.exports = async msg => {
+module.exports = async (msg) => {
 
     let resBot = ``;
 
@@ -10,7 +10,7 @@ module.exports = async msg => {
 
     services = JSON.parse(services);
 
-    services.forEach((service) => {
+    services.forEach(service=> {
         resBot += `\n Послуга: ${service.service} \n Ціна: ${service.price}\n`;
     });
 

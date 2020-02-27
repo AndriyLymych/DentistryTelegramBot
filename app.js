@@ -9,7 +9,7 @@ const {
     },
     getAllDoctorsHandler,
     getServicesHandler,
-    receptionRememberMessage
+    askEmailHandler
 } = require('./botHandlers');
 const {userMessages} = require('./constant');
 const {bot} = require('./createBot');
@@ -34,21 +34,25 @@ try {
             await getAllDoctorsHandler(msg);
 
         } else if (msg.text.includes(userMessages.workingTime)) {
+
             await workingTimeHandler(msg);
 
         } else if (msg.text.includes(userMessages.bye)) {
             await goodByHandler(msg);
-        } else if (msg.text.includes(userMessages.rec)) {
-            await receptionRememberMessage(msg);
+
+        } else if (msg.text.includes(userMessages.myReceptions)) {
+
+            await askEmailHandler(msg);
+
         } else {
+
             await unknownMsgHandler(msg)
         }
     })
 
-    receptionRememberMessage()
 
 } catch (e) {
-    bot.sendMessage(ADMIN_CHAT_ID, JSON.stringify(e))
+    bot.sendMessage(ADMIN_CHAT_ID, JSON.stringify(e.message))
 }
 
 
