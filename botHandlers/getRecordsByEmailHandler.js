@@ -1,23 +1,27 @@
 const requestPromise = require('request-promise');
 
 const {bot} = require('../createBot');
-const {HOST} = require('../config/config');
+const {HOST, PORT} = require('../config/config');
 
 module.exports = async msg => {
     const chatId = msg.chat.id;
+
     let resBot = ``;
+
     const options = ({
         method: 'PUT',
-        uri: 'http://v2.openapi.ele.me/restaurant/62028381/order_mode/?consumer_key=0170804777&sig=bc8b56be4f9d33942eb22bd66ab1f2a49eea91f4&timestamp=1465890208',
+        uri: `${HOST}${PORT}/receptions?email=${msg.text}`,
         body: {
-            order_mode: 1
+            chat_id: JSON.stringify(chatId)
         },
         json: true,
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-        },
+
+
     })
-    let records = JSON.parse(await requestPromise.get(`${HOST}/receptions?email=${msg.text}`));
+    await requestPromise(options);
+
+    let records = JSON.parse(await requestPromise.get(`${HOST}${PORT}/receptions?email=${msg.text}`));
+
     for (const record of records) {
         const {date, MedicalService: {service}} = record;
 
@@ -25,5 +29,5 @@ module.exports = async msg => {
     }
 
 
-    return bot.sendMessage(chatId, resBot);
+    bot.sendMessage(chatId, resBot);
 };

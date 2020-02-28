@@ -11,13 +11,16 @@ const {
     },
     getAllDoctorsHandler,
     getServicesHandler,
-    askEmailHandler
+    askEmailHandler,
+    getRecordsByEmailHandler,
+    receptionRememberMessage
 } = require('./botHandlers');
 const {userMessages} = require('./constant');
 const {bot} = require('./createBot');
 const {ADMIN_CHAT_ID} = require('./config/config');
 
 try {
+
     bot.on('message', async msg => {
 
         if (msg.text.includes(userMessages.start)) {
@@ -42,10 +45,16 @@ try {
 
         } else if (msg.text.includes(userMessages.myReceptions)) {
             await askEmailHandler(msg);
+        } else if (msg.text.includes('@')) {
+            await getRecordsByEmailHandler(msg);
         } else {
             await unknownMsgHandler(msg)
+
         }
+
     })
+
+    receptionRememberMessage()
 
 } catch (e) {
     bot.sendMessage(ADMIN_CHAT_ID, JSON.stringify(e.message))
