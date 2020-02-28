@@ -9,7 +9,7 @@ module.exports = async msg => {
     const chatId = msg.chat.id;
     let resBot = ``;
 
-    let records = await requestPromise.get(`${HOST}${PORT}/receptions?chat_id=${chatId}`);
+    let records = await requestPromise.get(`${HOST}:${PORT}/receptions?chat_id=${chatId}`);
 
     records = JSON.parse(records);
 

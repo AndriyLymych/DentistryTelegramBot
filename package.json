@@ -12,7 +12,8 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "node-telegram-bot-api": "^0.40.0",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.5",
+    "request": "latest"
   },
   "devDependencies": {
     "@types/node-cron": "^2.0.3",

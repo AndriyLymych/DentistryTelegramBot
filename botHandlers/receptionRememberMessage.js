@@ -9,7 +9,7 @@ module.exports = async () => {
     let resBot = ``;
     const nowTime = new Date();
 
-    const records = JSON.parse(await requestPromise.get(`${HOST}${PORT}/receptions`));
+    const records = JSON.parse(await requestPromise.get(`${HOST}:${PORT}/receptions`));
 
     // cron.schedule('* * * * * *', async () => {
     //

@@ -7,20 +7,18 @@ module.exports = async msg => {
     const chatId = msg.chat.id;
 
     let resBot = ``;
-
     const options = ({
         method: 'PUT',
-        uri: `${HOST}${PORT}/receptions?email=${msg.text}`,
+        uri: `${HOST}:${PORT}/receptions?email=${msg.text}`,
         body: {
-            chat_id: JSON.stringify(chatId)
+            chat_id: chatId
         },
-        json: true,
-
+        json: true
 
     })
     await requestPromise(options);
-
-    let records = JSON.parse(await requestPromise.get(`${HOST}${PORT}/receptions?email=${msg.text}`));
+    console.log('ok');
+    let records = JSON.parse(await requestPromise.get(`${HOST}:${PORT}/receptions?email=${msg.text}`));
 
     for (const record of records) {
         const {date, MedicalService: {service}} = record;
