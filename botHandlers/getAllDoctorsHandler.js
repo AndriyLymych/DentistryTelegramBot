@@ -1,12 +1,12 @@
 const {bot} = require('../createBot');
 const requestPromise = require('request-promise');
-const {HOST} = require('../config/config');
+const {HOST, PORT} = require('../config/config');
 
 module.exports = async msg => {
 
     let resBot = ``;
 
-    let doctors = await requestPromise.get(HOST + '/doctors');
+    let doctors = await requestPromise.get(`${HOST}:${PORT}/doctors`);
 
     doctors = JSON.parse(doctors);
 

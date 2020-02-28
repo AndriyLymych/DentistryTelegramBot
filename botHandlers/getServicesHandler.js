@@ -1,12 +1,12 @@
 const {bot} = require('../createBot');
 const requestPromise = require('request-promise');
-const {HOST} = require('../config/config');
+const {HOST, PORT} = require('../config/config');
 
 module.exports = async (msg) => {
 
     let resBot = ``;
 
-    let services = await requestPromise.get(HOST + '/services');
+    let services = await requestPromise.get(`${HOST}:${PORT}/services`);
 
     services = JSON.parse(services);
 
@@ -15,5 +15,4 @@ module.exports = async (msg) => {
     });
 
     await bot.sendMessage(msg.chat.id, resBot);
-
 };
