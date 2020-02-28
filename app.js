@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const {
     infoHandler: {
         startHandler,
@@ -16,7 +18,6 @@ const {bot} = require('./createBot');
 const {ADMIN_CHAT_ID} = require('./config/config');
 
 try {
-
     bot.on('message', async msg => {
 
         if (msg.text.includes(userMessages.start)) {
@@ -34,7 +35,6 @@ try {
             await getAllDoctorsHandler(msg);
 
         } else if (msg.text.includes(userMessages.workingTime)) {
-
             await workingTimeHandler(msg);
 
         } else if (msg.text.includes(userMessages.bye)) {
@@ -43,11 +43,9 @@ try {
         } else if (msg.text.includes(userMessages.myReceptions)) {
             await askEmailHandler(msg);
         } else {
-
             await unknownMsgHandler(msg)
         }
     })
-
 
 } catch (e) {
     bot.sendMessage(ADMIN_CHAT_ID, JSON.stringify(e.message))
