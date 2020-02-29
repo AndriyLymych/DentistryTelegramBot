@@ -18,6 +18,10 @@ module.exports = async msg => {
 
     let records = JSON.parse(await requestPromise.get(`${HOST}:${PORT}/receptions?email=${msg.text}`));
 
+    if (!records.length){
+       return  bot.sendMessage(chatId,'☹️ Зареєстрованих записів по цій адресі електронної скриньки немає.Ви можете записатися на прийом на нашому сайті https://simstomat.kiev.ua/ 👈')
+    }
+
     for (const record of records) {
         let {date, MedicalService: {service}} = record;
 
