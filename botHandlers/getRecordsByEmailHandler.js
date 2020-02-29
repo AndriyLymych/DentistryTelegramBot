@@ -7,25 +7,26 @@ module.exports = async msg => {
     const chatId = msg.chat.id;
 
     let resBot = ``;
-    const options = ({
-        method: 'PUT',
-        uri: `${HOST}:${PORT}/receptions?email=${msg.text}`,
+
+    JSON.stringify(await requestPromise.put(`${HOST}:${PORT}/patients/reception?email=${msg.text}`, {
         body: {
             chat_id: chatId
         },
-        json: true
+        json: true,
+        encoding: 'utf8'
+    }));
 
-    })
-    await requestPromise(options);
-    console.log('ok');
     let records = JSON.parse(await requestPromise.get(`${HOST}:${PORT}/receptions?email=${msg.text}`));
 
     for (const record of records) {
-        const {date, MedicalService: {service}} = record;
+        let {date, MedicalService: {service}} = record;
 
-        resBot += `Дата: ${new Date(date).toLocaleDateString()}\nПослуга: ${service} \n \n`;
+        date= new Date(date);
+
+        resBot += `⚙️ <i><b>Послуга:</b></i><b> ${service}</b> \n🗓 <i><b>Дата:</b></i> <b>${date.getHours()}:${date.getMinutes()}  ${date.getDay()+1}-${date.getMonth()+1}-${date.getFullYear()}</b>\n \n`;
+
     }
 
 
-    bot.sendMessage(chatId, resBot);
+    bot.sendMessage(chatId, resBot,{parse_mode: "HTML"});
 };

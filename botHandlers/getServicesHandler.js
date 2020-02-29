@@ -10,9 +10,14 @@ module.exports = async (msg) => {
 
     services = JSON.parse(services);
 
-    services.forEach(service=> {
-        resBot += `\n Послуга: ${service.service} \n Ціна: ${service.price}\n`;
+    services.forEach(obj=> {
+        const {service,price} = obj;
+
+        resBot += `\n <i><b>💊 Послуга:</b></i> <b>${service}</b> 
+<i><b>💰 Ціна:</b></i> <b>${price} грн.</b> \n`;
     });
 
-    await bot.sendMessage(msg.chat.id, resBot);
+    await bot.sendMessage(msg.chat.id,'<b>ДОСТУПНІ ПОСЛУГИ </b> ⬇️  ❤️',{parse_mode: "HTML"});
+
+    await bot.sendMessage(msg.chat.id, resBot,{parse_mode: "HTML"});
 };

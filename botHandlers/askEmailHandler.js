@@ -19,10 +19,12 @@ module.exports = async msg => {
     }
 
     for (const record of records) {
-        const {date, MedicalService: {service}} = record;
+        let {date, MedicalService: {service}} = record;
 
-        resBot += `Дата: ${new Date(date).toLocaleDateString()}\nПослуга: ${service} \n \n`;
+        date = new Date(date);
+
+        resBot += `⚙️ <i><b>Послуга:</b></i><b> ${service}</b> \n🗓 <i><b>Дата:</b></i> <b>${date.getHours()}:${date.getMinutes()}  ${date.getDay()+1}-${date.getMonth()+1}-${date.getFullYear()}</b>\n \n`;
     }
 
-    return bot.sendMessage(chatId, resBot);
+    return bot.sendMessage(chatId, resBot,{parse_mode: "HTML"});
 };

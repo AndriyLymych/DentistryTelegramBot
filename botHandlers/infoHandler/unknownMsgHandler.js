@@ -6,6 +6,7 @@ module.exports = async msg => {
     await bot.sendMessage(
         msg.chat.id, infoMessages.anyMsg, {
             reply_markup: {
+                resize_keyboard:true,
                 keyboard: [["start"]]
             }
         }
