@@ -8,29 +8,26 @@ module.exports = async msg => {
 
     let resBot = ``;
 
-    JSON.stringify(await requestPromise.put(`${HOST}:${PORT}/patients/reception?email=${msg.text}`, {
-        body: {
-            chat_id: chatId
-        },
-        json: true,
-        encoding: 'utf8'
-    }));
-
-    let records = JSON.parse(await requestPromise.get(`${HOST}:${PORT}/receptions?email=${msg.text}`));
-
-    if (!records.length){
-       return  bot.sendMessage(chatId,'☹️ Зареєстрованих записів по цій адресі електронної скриньки немає.Ви можете записатися на прийом на нашому сайті https://simstomat.kiev.ua/ 👈')
+    if (!msg.text.includes('@') ) {
+        return bot.sendMessage(chatId, '☹️ Зареєстрованих записів по цій адресі електронної скриньки немає.Ви можете записатися на прийом на нашому сайті https://simstomat.kiev.ua/ 👈')
     }
+
+    let records = JSON.parse(await requestPromise.get(`${HOST}:${PORT}/receptions/telegram?email=${msg.text}`));
+
+    if (!records.length ) {
+        return bot.sendMessage(chatId, '☹️ Зареєстрованих записів по цій адресі електронної скриньки немає.Ви можете записатися на прийом на нашому сайті https://simstomat.kiev.ua/ 👈')
+    }
+
 
     for (const record of records) {
         let {date, MedicalService: {service}} = record;
 
-        date= new Date(date);
+        date = new Date(date);
 
-        resBot += `⚙️ <i><b>Послуга:</b></i><b> ${service}</b> \n🗓 <i><b>Дата:</b></i> <b>${date.getHours()}:${date.getMinutes()}  ${date.getDay()+1}-${date.getMonth()+1}-${date.getFullYear()}</b>\n \n`;
+        resBot += `⚙️ <i><b>Послуга:</b></i><b> ${service}</b> \n🗓 <i><b>Дата:</b></i> <b>${date.getHours()}:${date.getMinutes()}  ${date.getDay() + 1}-${date.getMonth() + 1}-${date.getFullYear()}</b>\n \n`;
 
     }
 
 
-    bot.sendMessage(chatId, resBot,{parse_mode: "HTML"});
+     bot.sendMessage(chatId, resBot, {parse_mode: "HTML"});
 };

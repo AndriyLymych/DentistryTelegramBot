@@ -7,13 +7,13 @@ const {
         locationHandler,
         workingTimeHandler,
         goodByHandler,
-        unknownMsgHandler
+        unknownMsgHandler,
+        badEmailHandler
     },
     getAllDoctorsHandler,
     getServicesHandler,
     askEmailHandler,
     getRecordsByEmailHandler,
-    receptionRememberMessage
 } = require('./botHandlers');
 const {userMessages} = require('./constant');
 const {bot} = require('./createBot');
@@ -47,14 +47,14 @@ try {
             await askEmailHandler(msg);
         } else if (msg.text.includes('@')) {
             await getRecordsByEmailHandler(msg);
+
         } else {
             await unknownMsgHandler(msg)
 
         }
 
-    })
+    });
 
-    receptionRememberMessage()
 
 } catch (e) {
     bot.sendMessage(ADMIN_CHAT_ID, JSON.stringify(e.message))

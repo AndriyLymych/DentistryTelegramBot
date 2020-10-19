@@ -11,10 +11,10 @@ module.exports = async msg => {
     doctors = JSON.parse(doctors);
 
     doctors.forEach((doctor) => {
-        const {name, middleName, surname, age} = doctor;
+        const {name, middleName, surname, age, UserSpeciality:{label:speciality}} = doctor;
 
         resBot += `\n <i><b>👨‍⚕ 👩‍⚕ Лікар : </b></i><b>${name} ${middleName} ${surname}</b> 🔝 
-    <i><b>⏳ Вік : </b></i> <b>${age}</b> \n    <i><b>🧰 Спеціальнісь:  </b></i> <b>${doctor['UserSpeciality.label']}</b> \n\n`;
+    <i><b>⏳ Вік : </b></i> <b>${age}</b> \n    <i><b>🧰 Спеціальнісь:  </b></i> <b>${speciality}</b> \n\n`;
     });
     await bot.sendMessage(msg.chat.id, ' <b>НАШІ СПЕЦІАЛІСТИ  ⬇  ️💚️</b>', {parse_mode: "HTML"});
 

@@ -9,4 +9,4 @@ module.exports = async msg => {
     await bot.sendMessage(
         msg.chat.id, infoMessages.location.locInfo, infoMessages.menu
     );
-}
+};
